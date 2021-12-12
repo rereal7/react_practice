@@ -1,11 +1,31 @@
 import './App.css';
+import React, {useState} from 'react';
 
-function App() {
-    return (
-        <div className="App">
-            <h1>準備完了！</h1>
-        </div>
-    );
+// ログアウトコンポーネント
+const LogoutButton = (props) => {
+    return <button onClick={props.toggleIsLoggedIn}>ログアウト</button>
+}
+// ログインコンポーネント
+const LoginButton = (props) => {
+    return <button onClick={props.toggleIsLoggedIn}>ログイン</button>
+}
+
+const LoginControl = () => {
+    const [isLoggedIn, setIsLoggedInState] = useState(false);
+
+    const toggleIsLoggedIn = () => {
+        setIsLoggedInState(!isLoggedIn);
+    }
+
+    if (isLoggedIn) {
+        return <LogoutButton toggleIsLoggedIn={toggleIsLoggedIn} />;
+    }
+
+    return <LoginButton toggleIsLoggedIn={toggleIsLoggedIn} />;
+}
+
+const App = () => {
+    return <LoginControl />
 }
 
 export default App;
