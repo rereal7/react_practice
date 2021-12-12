@@ -1,38 +1,17 @@
 import './App.css';
-// import React, {useState} from 'react';
 
-const Hello = () => {
-    const isReact = true;
+const numbers = [2, 4, 6, 8];
 
-    return (
-        <>
-            <p>
-                {(() => {
-                    if (isReact) {
-                        return "Hello React!1";
-                    }else{
-                        return "Hello Something!1";
-                    }
-                })()}
-            </p>
-            <p>
-                {(function() {
-                    if (!isReact) {
-                        return "Hello React!2";
-                    }else{
-                        return "Hello Something!2";
-                    }
-                }())}
-            </p>
-            <p>{isReact ? "Hello, React!3" : "Hello Something!3"}</p>
-            <p>{isReact && "Hello, React!4"}</p>
-            <p>{isReact || "Hello, React!5"}</p>
-        </>
-    )
+const ListItems = () => {
+    const items = numbers.map((item) => {
+        return <li key={item}>{item}</li>
+    });
+
+    return <ul>{items}</ul>
 }
 
 const App = () => {
-    return <Hello />
+    return <ListItems />
 }
 
 export default App;
