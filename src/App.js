@@ -1,17 +1,20 @@
 import './App.css';
 
-const numbers = [2, 4, 6, 8];
-
-const ListItems = () => {
-    const items = numbers.map((item) => {
-        return <li key={item}>{item}</li>
-    });
-
-    return <ul>{items}</ul>
+const handleClick = (e) => {
+    console.log(e.target.value);
 }
 
+const SampleButton = () => {
+    return (
+        <>
+            <input type="button" value="ボタン" onClick={handleClick} />
+            <input type="text" defaultValue="" onChange={handleClick} />
+        </>
+    );
+};
+
 const App = () => {
-    return <ListItems />
+    return <SampleButton />
 }
 
 export default App;
