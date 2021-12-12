@@ -1,31 +1,38 @@
 import './App.css';
-import React, {useState} from 'react';
+// import React, {useState} from 'react';
 
-// ログアウトコンポーネント
-const LogoutButton = (props) => {
-    return <button onClick={props.toggleIsLoggedIn}>ログアウト</button>
-}
-// ログインコンポーネント
-const LoginButton = (props) => {
-    return <button onClick={props.toggleIsLoggedIn}>ログイン</button>
-}
+const Hello = () => {
+    const isReact = true;
 
-const LoginControl = () => {
-    const [isLoggedIn, setIsLoggedInState] = useState(false);
-
-    const toggleIsLoggedIn = () => {
-        setIsLoggedInState(!isLoggedIn);
-    }
-
-    if (isLoggedIn) {
-        return <LogoutButton toggleIsLoggedIn={toggleIsLoggedIn} />;
-    }
-
-    return <LoginButton toggleIsLoggedIn={toggleIsLoggedIn} />;
+    return (
+        <>
+            <p>
+                {(() => {
+                    if (isReact) {
+                        return "Hello React!1";
+                    }else{
+                        return "Hello Something!1";
+                    }
+                })()}
+            </p>
+            <p>
+                {(function() {
+                    if (!isReact) {
+                        return "Hello React!2";
+                    }else{
+                        return "Hello Something!2";
+                    }
+                }())}
+            </p>
+            <p>{isReact ? "Hello, React!3" : "Hello Something!3"}</p>
+            <p>{isReact && "Hello, React!4"}</p>
+            <p>{isReact || "Hello, React!5"}</p>
+        </>
+    )
 }
 
 const App = () => {
-    return <LoginControl />
+    return <Hello />
 }
 
 export default App;
