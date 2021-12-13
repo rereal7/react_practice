@@ -54,11 +54,49 @@ const InputSelectBox = () => {
     )
 }
 
+const lists = [
+    {id: 1, item: "赤"},
+    {id: 2, item: "青"},
+    {id: 3, item: "黄"},
+];
+
+const RadioBtnItems = ({onChange, checked}) => (
+    lists.map((list) => {
+        return (
+            <label key={list.id}>
+                <input
+                    type="radio"
+                    value={list.item}
+                    onChange={onChange}
+                    checked={checked === list.item}
+                />
+                {list.item}
+            </label>
+        )
+    })
+);
+
+const InputRadio = () => {
+    const [checkedValue, setCheckedValue] = useState(lists[0]['item']);
+    const handleChange = (e) => setCheckedValue(e.target.value);
+
+    return (
+        <div className="App">
+            <p>
+                現在選択されている値：
+                <b>{checkedValue}</b>
+            </p>
+            <RadioBtnItems onChange={handleChange} checked={checkedValue} />
+        </div>
+    );
+}
+
 const App = () => {
     return (
         <>
             <Input />
             <InputSelectBox />
+            <InputRadio />
         </>
     )
 }
