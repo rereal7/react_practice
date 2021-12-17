@@ -105,7 +105,7 @@ const CheckBoxItems = ({onChange, checked}) => (
                     type='checkbox'
                     value={list.item}
                     onChange={onChange}
-                    checked={checked.includes(list.item)}
+                    checked={checked[list.item]}
                 />
                 {list.item}
             </label>
@@ -114,22 +114,28 @@ const CheckBoxItems = ({onChange, checked}) => (
 );
 
 const InputCheckBox = () => {
-    const [checkedValues, setCheckedValues] = useState([]);
-    const handleChange = (e) => {
-        if (checkedValues.includes(e.target.value)) {
-            return setCheckedValues(
-                checkedValues.filter((checkedValue) => checkedValue !== e.target.value)
-            );
-        }
+    const [checkedValues, setCheckedValues] = useState(
+        checkLists.reduce((pre, cur) => {
+            pre[cur.item] = false
+            return pre
+        },{})
+    );
+    console.log(checkedValues);
 
-        setCheckedValues([...checkedValues, e.target.value]);
-    }
+    const handleChange = (e) => {
+        setCheckedValues({...checkedValues, [e.target.value]:e.target.checked});
+    };
+
+    const stateOfCheckedValue = Object.entries(checkedValues).reduce((pre, [key, value]) => {
+        value && pre.push(key);
+        return pre;
+    },[]);
 
     return (
         <div className='App'>
             <p>
                 現在選択されている値：
-                <b>{checkedValues.join('、')}</b>
+                <b>{stateOfCheckedValue.join('、')}</b>
             </p>
             <CheckBoxItems onChange={handleChange} checked={checkedValues} />
         </div>
