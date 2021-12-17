@@ -91,12 +91,58 @@ const InputRadio = () => {
     );
 }
 
+const checkLists = [
+    {id: 1, item: 'マウス'},
+    {id: 2, item: 'モニター'},
+    {id: 3, item: 'キーボード'},
+];
+
+const CheckBoxItems = ({onChange, checked}) => (
+    checkLists.map((list) => {
+        return (
+            <label key={list.id}>
+                <input
+                    type='checkbox'
+                    value={list.item}
+                    onChange={onChange}
+                    checked={checked.includes(list.item)}
+                />
+                {list.item}
+            </label>
+        )
+    })
+);
+
+const InputCheckBox = () => {
+    const [checkedValues, setCheckedValues] = useState([]);
+    const handleChange = (e) => {
+        if (checkedValues.includes(e.target.value)) {
+            return setCheckedValues(
+                checkedValues.filter((checkedValue) => checkedValue !== e.target.value)
+            );
+        }
+
+        setCheckedValues([...checkedValues, e.target.value]);
+    }
+
+    return (
+        <div className='App'>
+            <p>
+                現在選択されている値：
+                <b>{checkedValues.join('、')}</b>
+            </p>
+            <CheckBoxItems onChange={handleChange} checked={checkedValues} />
+        </div>
+    );
+}
+
 const App = () => {
     return (
         <>
             <Input />
             <InputSelectBox />
             <InputRadio />
+            <InputCheckBox />
         </>
     )
 }
