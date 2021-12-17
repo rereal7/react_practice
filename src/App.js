@@ -120,13 +120,15 @@ const InputCheckBox = () => {
             return pre
         },{})
     );
-    console.log(checkedValues);
+    // console.log(checkedValues);
 
     const handleChange = (e) => {
         setCheckedValues({...checkedValues, [e.target.value]:e.target.checked});
     };
 
     const stateOfCheckedValue = Object.entries(checkedValues).reduce((pre, [key, value]) => {
+        // console.log(pre)
+        // console.log([key, value])
         value && pre.push(key);
         return pre;
     },[]);
